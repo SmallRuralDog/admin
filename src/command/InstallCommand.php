@@ -135,29 +135,12 @@ SQL
 
         $output->writeln('创建数据库表成功');
 
-        $this->initAdminDir();
-
         $this->initData();
 
         return self::SUCCESS;
     }
 
-    protected static $pathRelation = array(
-        __DIR__ . '/../command/sub/admin' => 'admin',
-    );
 
-    private function initAdminDir(): void
-    {
-        foreach (static::$pathRelation as $source => $dest) {
-            if ($pos = strrpos($dest, '/')) {
-                $parent_dir = base_path() . '/' . substr($dest, 0, $pos);
-                if (!is_dir($parent_dir)) {
-                    mkdir($parent_dir, 0777, true);
-                    copy_dir($source, base_path() . "/$dest");
-                }
-            }
-        }
-    }
 
 
     private function initData(): void

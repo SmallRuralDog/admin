@@ -11,6 +11,7 @@ class Install
      */
     protected static $pathRelation = array(
         'config/plugin/smallruraldog/admin' => 'config/plugin/smallruraldog/admin',
+        'command/sub/admin' => 'admin',
     );
 
     /**
@@ -58,6 +59,10 @@ class Install
     public static function uninstallByRelation()
     {
         foreach (static::$pathRelation as $source => $dest) {
+            //后台项目不删除
+            if ($dest == 'admin') {
+                continue;
+            }
             $path = base_path() . "/$dest";
             if (!is_dir($path) && !is_file($path)) {
                 continue;
