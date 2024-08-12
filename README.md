@@ -1,16 +1,19 @@
 # webman admin
 
-创建webman项目
+创建 webman 项目
+
 ```shell
 composer create-project workerman/webman project-name
 ```
 
 安装扩展
+
 ```shell
 composer require smallruraldog/admin
 ```
 
-创建.env文件
+创建.env 文件
+
 ```shell
 ADMIN_ROUTE_SUFFIX=admin
 ADMIN_DOMAIN=false
@@ -23,7 +26,8 @@ DB_PASSWORD=
 DB_SOCKET=
 ```
 
-配置database.php
+配置 database.php
+
 ```php
 return [
     'default' => 'mysql',
@@ -44,24 +48,28 @@ return [
         ],
     ],
 ];
-````
- 
-初始化数据
+```
+
+初始化数据，只需要在首次安装时执行
+
 ```shell
 php webman smallruraldog-admin:install
 ```
 
-发布资源文件
-```shell    
+发布资源文件，如果有更新，需要重新发布
+
+```shell
 php webman smallruraldog-admin:assets
 ```
 
 启动项目
+
 ```shell
 php start.php start
 ```
 
 访问后台
+
 ```
 http://0.0.0.0:8787/admin
 ```
