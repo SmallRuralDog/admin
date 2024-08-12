@@ -17,7 +17,7 @@ class Admin
      */
     public static function userId(): int
     {
-        return (int)request()->session()->get('admin_id');
+        return (int)request()?->session()->get('admin_id');
     }
 
     /**
