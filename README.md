@@ -79,3 +79,20 @@ php start.php start
 ```
 http://0.0.0.0:8787/admin
 ```
+
+加入文件监听
+
+修改配置文件 `config/process.php`
+加入以下代码到 `monitorDir` 数组中
+```php
+base_path() . '/admin',
+```
+
+修改监进程文件 `process\Monitor.php`
+注释掉以下两行代码
+```php
+if (DIRECTORY_SEPARATOR === '/' && isset($this->loadedFiles[$file->getRealPath()])) {
+    //echo "$file updated but cannot be reloaded because only auto-loaded files support reload.\n";
+    //continue;
+}
+```
