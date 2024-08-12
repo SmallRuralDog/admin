@@ -12,6 +12,7 @@ use smallruraldog\admin\model\SystemUser;
 use smallruraldog\admin\renderer\Each;
 use smallruraldog\admin\renderer\form\Group;
 use smallruraldog\admin\renderer\form\InputDateRange;
+use smallruraldog\admin\renderer\form\InputImage;
 use smallruraldog\admin\renderer\form\InputText;
 use smallruraldog\admin\renderer\Tpl;
 
@@ -72,6 +73,8 @@ class UserController extends AdminController
         return Form::make(SystemUser::query(), function (Form $form) {
 
             $form->customLayout([
+
+                $form->item('avatar', '头像')->useFormItem(InputImage::make()),
 
                 Group::make()->body([
                     $form->item('username', '用户名')->required()->useFormItem(),

@@ -10,7 +10,6 @@ use Webman\Http\Request;
 class Admin
 {
 
-
     /**
      * 获取当前登录用户ID
      * @return int

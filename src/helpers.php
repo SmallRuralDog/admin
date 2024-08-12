@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\HtmlString;
+use Illuminate\Support\Str;
+use Shopwwi\WebmanFilesystem\Facade\Storage;
 use support\Response;
 
 
@@ -33,6 +35,34 @@ function admin_url(string $path): string
     return "/$suffix/$path";
 }
 
+
+if (!function_exists('admin_file_url')) {
+    function admin_file_url($path)
+    {
+        if (!$path) {
+            return $path;
+        }
+
+        if (Str::startsWith($path, ["http://", "https://"])) {
+            return $path;
+        }
+        return Storage::adapter(admin_config('upload.disk'))->url($path);
+    }
+}
+
+if (!function_exists('admin_file_restore_path')) {
+    function admin_file_restore_path($url)
+    {
+        if (!$url) {
+            return $url;
+        }
+        if (Str::startsWith($url, ["http://", "https://"])) {
+            $base_url = Storage::adapter(admin_config('upload.disk'))->url('');
+            $url = str_replace($base_url, '', $url);
+        }
+        return $url;
+    }
+}
 
 /**
  * 抛出异常
