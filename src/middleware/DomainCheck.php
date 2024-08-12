@@ -12,7 +12,7 @@ class DomainCheck implements MiddlewareInterface
     public function process(Request $request, callable $handler): Response
     {
         $domain = $request->host();
-        $adminDomain = config('plugin.smallruraldog.admin.app.domain');
+        $adminDomain = admin_config('domain');
         if ($adminDomain && $adminDomain !== $domain) {
             return jsonError('Domain not allowed', 404);
         }
