@@ -12,6 +12,12 @@ composer create-project workerman/webman project-name
 composer require smallruraldog/admin
 ```
 
+更新扩展
+
+```shell
+composer update smallruraldog/admin
+```
+
 创建.env 文件
 
 ```shell
