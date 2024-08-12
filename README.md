@@ -22,7 +22,7 @@ composer update smallruraldog/admin
 
 ```shell
 ADMIN_ROUTE_SUFFIX=admin
-ADMIN_DOMAIN=false
+ADMIN_DOMAIN=
 
 DB_HOST=127.0.0.1
 DB_PORT=3306
