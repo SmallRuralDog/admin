@@ -20,8 +20,8 @@ class InstallCommand extends Command
     {
 
         //检测system_user表是否存在
-        if (Db::table('system_user')->exists()) {
-            $output->writeln('已安装');
+        if (Db::schema()->hasTable('system_user')) {
+            $output->writeln('数据库表已存在');
             return self::SUCCESS;
         }
 
@@ -139,8 +139,6 @@ SQL
 
         return self::SUCCESS;
     }
-
-
 
 
     private function initData(): void
