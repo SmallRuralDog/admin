@@ -14,6 +14,7 @@
     "workerman/validation": "^3.1",
     "symfony/var-dumper": "^7.1",
     "illuminate/events": "^11.20",
+    "webman/captcha": "^1.0",
     "shopwwi/webman-filesystem": "^1.1",
     "shopwwi/filesystem-oss": "^1.0"
   },

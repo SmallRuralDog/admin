@@ -7,10 +7,15 @@ use Exception;
 use Respect\Validation\Validator as v;
 use smallruraldog\admin\Admin;
 use smallruraldog\admin\model\SystemUser;
+use smallruraldog\admin\renderer\Button;
 use smallruraldog\admin\renderer\form\AmisForm;
 use smallruraldog\admin\renderer\form\InputText;
+use smallruraldog\admin\renderer\QRCode;
+use smallruraldog\admin\renderer\Tab;
+use smallruraldog\admin\renderer\Tabs;
 use support\Request;
 use support\Response;
+use Webman\Captcha\CaptchaBuilder;
 
 class AuthController extends AdminBase
 {
@@ -25,7 +30,12 @@ class AuthController extends AdminBase
             $data = v::input($request->all(), [
                 'username' => v::notEmpty()->setName('用户名'),
                 'password' => v::notEmpty()->length(5, 64)->setName('密码'),
+                'verification_code' => v::notEmpty()->length(3, 8)->setName('验证码'),
             ]);
+            $captcha = $data['verification_code'];
+            if (strtolower($captcha) !== $request->session()->get('captcha')) {
+                return jsonError("输入的验证码不正确");
+            }
 
             /** @var SystemUser $adminUser */
             $adminUser = SystemUser::query()->where('username', $data['username'])->first();
@@ -42,6 +52,23 @@ class AuthController extends AdminBase
             return jsonError($exception->getMessage());
         }
 
+    }
+
+    /**
+     * 输出验证码图像
+     */
+    public function captcha(Request $request): Response
+    {
+        // 初始化验证码类
+        $builder = new CaptchaBuilder;
+        // 生成验证码
+        $builder->build();
+        // 将验证码的值存储到session中
+        $request->session()->set('captcha', strtolower($builder->getPhrase()));
+        // 获得验证码图片二进制数据
+        $img_content = $builder->get();
+        // 输出验证码二进制数据
+        return response($img_content, 200, ['Content-Type' => 'image/jpeg']);
     }
 
 
@@ -94,6 +121,7 @@ class AuthController extends AdminBase
 
         $form = AmisForm::make()
             ->title('个人设置')
+            ->wrapWithPanel(false)
             ->data(Admin::userInfo()->only(['username', 'name']))
             //->resetAfterSubmit(true)
             ->api(route('admin.userSetting'));
@@ -103,8 +131,19 @@ class AuthController extends AdminBase
             InputText::make()->password()->name('old_password')->label('旧密码')->placeholder("请输入旧密码"),
             InputText::make()->password()->name('new_password')->label('密码')->placeholder("请输入密码"),
             InputText::make()->password()->name('new_password_confirmation')->label('确认密码')->placeholder("请输入确认密码"),
+            Button::make()->label('保存')->level('primary')->actionType('submit'),
         ]);
-        return jsonData($form);
+
+
+        $page = Tabs::make()
+            ->tabsMode("chrome")
+            ->tabs([
+                Tab::make()
+                    ->title("个人设置")
+                    ->body($form),
+            ]);
+
+        return jsonData($page);
     }
 
 }

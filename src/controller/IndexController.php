@@ -33,6 +33,7 @@ class IndexController extends AdminBase
             'footer' => '© 2024 SmallRuralDog. All Rights Reserved',
             'apiBase' => admin_url("/"),
             'prefix' => admin_config('route_suffix'),
+            'captchaUrl' => route('admin.auth.captcha')
         ];
 
         $vite_assets = vite_assets();

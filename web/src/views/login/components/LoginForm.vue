@@ -40,7 +40,6 @@
         :rules="[{ required: true, message: ` 验证码不能为空` }]"
         :validate-trigger="['change', 'blur']"
         hide-label
-        v-if="false"
       >
         <a-space>
           <a-input v-model="userInfo.verification_code" :placeholder="`验证码`">

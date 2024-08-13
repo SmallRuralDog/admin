@@ -35,6 +35,7 @@ namespace smallruraldog\admin\renderer;
  * @method $this loadingOn($v)
  * @method $this onClick($v)
  * @method $this body($v)
+ * @method $this actionType($v)
  */
 class Button extends BaseSchema
 {

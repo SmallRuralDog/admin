@@ -30,6 +30,7 @@ Route::group('/' . $suffix, function () {
     Route::post('/uploadFile', [HandleController::class, 'uploadFile'])->name('admin.handleUploadFile');
 
     Route::post('/auth/login', [AuthController::class, 'login'])->name('admin.auth.login');
+    Route::get('/auth/captcha', [AuthController::class, 'captcha'])->name('admin.auth.captcha');
     Route::post('/auth/logout', [AuthController::class, 'logout'])->name('admin.auth.logout');
 
 
