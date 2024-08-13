@@ -95,7 +95,7 @@ trait ModelBase
     {
         return 'put:' . route($this->getRouteName() . '.update', [
                 ...$parameters,
-                'id' => '${' . $key . '}',
+                'id' => $key,
             ]);
     }
 
