@@ -20,17 +20,10 @@ class IndexController extends AdminBase
 
         $config = [
             'title' => admin_config('title'),
-            'logo' => '//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/dfdba5317c0c20ce20e64fac803d52bc.svg~tplv-49unhts6dw-image.image',
-            'loginBanner' => [
-                [
-                    'title' => '内置了常见问题的解决方案',
-                    'image' => 'https://vuejs-core.cn/vue-admin-arco/static/png/login-banner-Cqtv5-d6.png',
-                    'desc' => '国际化，路由配置，状态管理应有尽有'
-                ],
-            ],
-            'loginTitle' => '登录',
-            'loginDesc' => '欢迎登录',
-            'footer' => '© 2024 SmallRuralDog. All Rights Reserved',
+            'logo' => admin_config('logo'),
+            'loginBanner' => admin_config('loginBanner'),
+            'loginTitle' => admin_config('loginTitle'),
+            'loginDesc' => admin_config('loginDesc'),
             'apiBase' => admin_url("/"),
             'prefix' => admin_config('route_suffix'),
             'captchaUrl' => route('admin.auth.captcha')
