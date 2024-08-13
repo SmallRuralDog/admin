@@ -37,231 +37,234 @@ trait ItemValidator
     /**
      * 不能为空
      */
-    public function required(): self
+    public function required(bool $enable = true): self
     {
-        $this->rule->notEmpty();
+
+        if ($enable) $this->rule->notEmpty();
         return $this;
     }
 
     //Alnum() 只包含字母和数字
 
     /**只包含字母和数字*/
-    public function alnum(): self
+    public function alnum(bool $enable = true): self
     {
-        $this->rule->alnum();
+
+        if ($enable) $this->rule->alnum();
         return $this;
     }
 
     //Alpha() 只包含字母
 
     /**只包含字母*/
-    public function alpha(): self
+    public function alpha(bool $enable = true): self
     {
-        $this->rule->alpha();
+        if ($enable) $this->rule->alpha();
         return $this;
     }
 
     //ArrayType() 数组类型
 
     /**数组类型*/
-    public function arrayType(): self
+    public function arrayType(bool $enable = true): self
     {
-        $this->rule->arrayType();
+        if ($enable) $this->rule->arrayType();
         return $this;
     }
     //Between(mixed $minimum, mixed $maximum) 验证输入是否在其他两个值之间。
 
     /**验证输入是否在其他两个值之间*/
-    public function between($minimum, $maximum): self
+    public function between($minimum, $maximum, bool $enable = true): self
     {
-        $this->rule->between($minimum, $maximum);
+        if ($enable) $this->rule->between($minimum, $maximum);
         return $this;
     }
     //BoolType() 验证是否是布尔型
 
     /**验证是否是布尔型*/
-    public function boolType(): self
+    public function boolType(bool $enable = true): self
     {
-        $this->rule->boolType();
+        if ($enable) $this->rule->boolType();
         return $this;
     }
     //Contains(mixed $expectedValue) 验证输入是否包含某些值
 
     /**验证输入是否包含某些值*/
-    public function contains($expectedValue): self
+    public function contains($expectedValue, bool $enable = true): self
     {
-        $this->rule->contains($expectedValue);
+        if ($enable) $this->rule->contains($expectedValue);
         return $this;
     }
     //ContainsAny(array $needles) 验证输入是否至少包含一个定义的值
 
     /**验证输入是否至少包含一个定义的值*/
-    public function containsAny(array $needles): self
+    public function containsAny(array $needles, bool $enable = true): self
     {
-        $this->rule->containsAny($needles);
+        if ($enable) $this->rule->containsAny($needles);
         return $this;
     }
     //Digit() 验证输入是否只包含数字
 
     /**验证输入是否只包含数字*/
-    public function digit(): self
+    public function digit(bool $enable = true): self
     {
-        $this->rule->digit();
+        if ($enable) $this->rule->digit();
         return $this;
     }
     //Domain() 验证是否是合法的域名
 
     /**验证是否是合法的域名*/
-    public function domain(): self
+    public function domain(bool $enable = true): self
     {
-        $this->rule->domain();
+        if ($enable) $this->rule->domain();
         return $this;
     }
     //Email() 验证是否是合法的邮件地址
 
     /**验证是否是合法的邮件地址*/
-    public function email(): self
+    public function email(bool $enable = true): self
     {
-        $this->rule->email();
+        if ($enable) $this->rule->email();
         return $this;
     }
     //Extension(string $extension) 验证后缀名
 
     /**验证后缀名*/
-    public function extension(string $extension): self
+    public function extension(string $extension, bool $enable = true): self
     {
-        $this->rule->extension($extension);
+        if ($enable) $this->rule->extension($extension);
         return $this;
     }
     //FloatType() 验证是否是浮点型
 
     /**验证是否是浮点型*/
-    public function floatType(): self
+    public function floatType(bool $enable = true): self
     {
-        $this->rule->floatType();
+        if ($enable) $this->rule->floatType();
         return $this;
     }
     //IntType() 验证是否是整数
 
     /**验证是否是整数*/
-    public function intType(): self
+    public function intType(bool $enable = true): self
     {
-        $this->rule->intType();
+        if ($enable) $this->rule->intType();
         return $this;
     }
     //In() 验证是否在给定的值中
 
     /**验证是否在给定的值中*/
-    public function in(array $haystack): self
+    public function in(array $haystack, bool $enable = true): self
     {
-        $this->rule->in($haystack);
+        if ($enable) $this->rule->in($haystack);
         return $this;
     }
 
     //Ip() 验证是否是ip地址
 
     /**验证是否是ip地址*/
-    public function ip(): self
+    public function ip(bool $enable = true): self
     {
-        $this->rule->ip();
+        if ($enable) $this->rule->ip();
         return $this;
     }
     //Json() 验证是否是json数据
 
     /**验证是否是json数据*/
-    public function json(): self
+    public function json(bool $enable = true): self
     {
-        $this->rule->json();
+        if ($enable) $this->rule->json();
         return $this;
     }
     //Length(int $min, int $max) 验证长度是否在给定区间
 
     /**验证长度是否在给定区间*/
-    public function length(int $min, int $max): self
+    public function length(int $min, int $max, bool $enable = true): self
     {
-        $this->rule->length($min, $max);
+        if ($enable) $this->rule->length($min, $max);
         return $this;
     }
     //LessThan(mixed $compareTo) 验证长度是否小于给定值
 
     /**验证长度是否小于给定值*/
-    public function lessThan($compareTo): self
+    public function lessThan($compareTo, bool $enable = true): self
     {
-        $this->rule->lessThan($compareTo);
+        if ($enable) $this->rule->lessThan($compareTo);
         return $this;
     }
     //Lowercase() 验证是否是小写字母
 
     /**验证是否是小写字母*/
-    public function lowercase(): self
+    public function lowercase(bool $enable = true): self
     {
-        $this->rule->lowercase();
+        if ($enable) $this->rule->lowercase();
         return $this;
     }
     //MacAddress() 验证是否是mac地址
 
     /**验证是否是mac地址*/
-    public function macAddress(): self
+    public function macAddress(bool $enable = true): self
     {
-        $this->rule->macAddress();
+        if ($enable) $this->rule->macAddress();
         return $this;
     }
     //NotEmpty() 验证是否为空
 
     /**验证是否为空*/
-    public function notEmpty(): self
+    public function notEmpty(bool $enable = true): self
     {
-        $this->rule->notEmpty();
+        if ($enable) $this->rule->notEmpty();
         return $this;
     }
     //NullType() 验证是否为null
 
     /**验证是否为null*/
-    public function nullType(): self
+    public function nullType(bool $enable = true): self
     {
-        $this->rule->nullType();
+        if ($enable) $this->rule->nullType();
         return $this;
     }
     //Number() 验证是否为数字
 
     /**验证是否为数字*/
-    public function number(): self
+    public function number(bool $enable = true): self
     {
-        $this->rule->number();
+        if ($enable) $this->rule->number();
         return $this;
     }
     //ObjectType() 验证是否为对象
 
     /**验证是否为对象*/
-    public function objectType(): self
+    public function objectType(bool $enable = true): self
     {
-        $this->rule->objectType();
+        if ($enable) $this->rule->objectType();
         return $this;
     }
     //StringType() 验证是否为字符串类型
 
     /**验证是否为字符串类型*/
-    public function stringType(): self
+    public function stringType(bool $enable = true): self
     {
-        $this->rule->stringType();
+        if ($enable) $this->rule->stringType();
         return $this;
     }
 
     //StartsWith(string $start) 验证是否以某个字符串开头
 
     /**验证是否以某个字符串开头*/
-    public function startsWith(string $start, bool $identical = false): self
+    public function startsWith(string $start, bool $identical = false, bool $enable = true): self
     {
-        $this->rule->startsWith($start, $identical);
+        $enable && $this->rule->startsWith($start, $identical);
         return $this;
     }
 
     //Url() 验证是否为url
 
     /**验证是否为url*/
-    public function url(): self
+    public function url(bool $enable = true): self
     {
-        $this->rule->url();
+        if ($enable) $this->rule->url();
         return $this;
     }
+
 }

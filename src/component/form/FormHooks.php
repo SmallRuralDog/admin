@@ -99,13 +99,18 @@ trait FormHooks
 
 
     /**
-     * 使用规则时触发
+     * 验证数据后触发，用于自定义验证规则
      * @param Closure $callback
      * @return Form
      */
-    public function useRules(Closure $callback): Form
+    public function useValidatorEnd(Closure $callback): Form
     {
-        return $this->registerHook('useRules', $callback);
+        return $this->registerHook('useValidatorEnd', $callback);
+    }
+
+    protected function callValidatorEnd($data): void
+    {
+        $this->callHooks('useValidatorEnd', $data);
     }
 
 
@@ -174,7 +179,6 @@ trait FormHooks
     {
         $this->callHooks('deleted');
     }
-
 
 
 }

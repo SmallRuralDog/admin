@@ -98,6 +98,10 @@ trait FormResource
                 }
             }
         }
+
+        $this->callValidatorEnd($data);
+
+
         return null;
 
 
@@ -196,6 +200,7 @@ trait FormResource
         $this->ignored[] = $field;
         return $this;
     }
+
     /**
      * 过滤需要忽略的字段
      * @param $input
@@ -456,7 +461,7 @@ trait FormResource
             $this->model = $this->builder->findOrFail($id);
             return $this->_update($data) ?: amisSuccess("更新成功");
         } catch (Exception $exception) {
-            return jsonError($exception->getMessage());
+            return amisError($exception->getMessage());
         }
     }
 

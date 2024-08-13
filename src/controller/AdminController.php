@@ -16,21 +16,14 @@ use support\Response;
 class AdminController extends AdminBase
 {
     /**
-     * @var bool 是否创建界面
+     * @var bool 是否创建
      */
     protected bool $isCreate = false;
     /**
-     * @var bool 是否编辑界面
+     * @var bool 是否编辑
      */
     protected bool $isEdit = false;
-    /**
-     * @var bool 是否新增提交
-     */
-    protected bool $isStore = false;
-    /**
-     * @var bool 是否修改提交
-     */
-    protected bool $isUpdate = false;
+
     /**
      * @var mixed|null 当前更新的id
      */
@@ -60,7 +53,7 @@ class AdminController extends AdminBase
     public function update(Request $request, $id)
     {
         $this->resourceKey = $id;
-        $this->isUpdate = true;
+        $this->isEdit = true;
 
         /**@var Form $form */
         $form = $this->form($request);
@@ -77,7 +70,7 @@ class AdminController extends AdminBase
 
     public function store(Request $request)
     {
-        $this->isStore = true;
+        $this->isCreate = true;
         return $this->form($request)->store();
     }
 

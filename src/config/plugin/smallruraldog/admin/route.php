@@ -24,10 +24,10 @@ Route::group('/' . $suffix, function () {
     Route::get('/view/{group}/{name}', [IndexController::class, 'root']);
     Route::get('/userMenus', [IndexController::class, 'userMenus']);
 
-    Route::any('/_handle_action_', [HandleController::class, 'action'])->name('admin.handleAction');
+    Route::any('/handleAction', [HandleController::class, 'action'])->name('admin.handleAction');
 
-    Route::post('_handle_upload_image_', [HandleController::class, 'uploadImage'])->name('admin.handleUploadImage');
-    Route::post('_handle_upload_file_', [HandleController::class, 'uploadFile'])->name('admin.handleUploadFile');
+    Route::post('/uploadImage', [HandleController::class, 'uploadImage'])->name('admin.handleUploadImage');
+    Route::post('/uploadFile', [HandleController::class, 'uploadFile'])->name('admin.handleUploadFile');
 
     Route::post('/auth/login', [AuthController::class, 'login'])->name('admin.auth.login');
     Route::post('/auth/logout', [AuthController::class, 'logout'])->name('admin.auth.logout');

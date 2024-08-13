@@ -3,6 +3,8 @@
 namespace smallruraldog\admin\controller\system;
 
 
+use mysql_xdevapi\Exception;
+use Respect\Validation\Validator;
 use smallruraldog\admin\Admin;
 use smallruraldog\admin\component\custom\DeptComponent;
 use smallruraldog\admin\component\Form;
@@ -73,9 +75,6 @@ class UserController extends AdminController
         return Form::make(SystemUser::query(), function (Form $form) {
 
             $form->customLayout([
-
-                $form->item('avatar', '头像')->useFormItem(InputImage::make()),
-
                 Group::make()->body([
                     $form->item('username', '用户名')->required()->useFormItem(),
                     $form->item('name', '昵称')
@@ -85,30 +84,30 @@ class UserController extends AdminController
                 Group::make()->body([
 
                     $form->item('password', '密码')
-                        ->useFormItem(InputText::make()->password())
-                        ->required($this->isCreate),
+                        ->required($this->isCreate)
+                        ->useFormItem(InputText::make()->password()),
                     $form->item('password_confirmation', '确认密码')
-                        ->useFormItem(InputText::make()->password())
-                        ->required($this->isCreate),
+                        ->required($this->isCreate)
+                        ->useFormItem(InputText::make()->password()),
                 ]),
                 Group::make()->body(function () use ($form) {
-
                     $body = [
                         $form->item('dept_id', '所属部门')
                             ->value(0)->useFormItem(DeptComponent::make()->deptSelect()),
                     ];
-
                     if (Admin::userInfo()->isAdministrator()) {
                         $body[] = $form->item('roles', "角色")
                             ->useFormItem(DeptComponent::make()->deptBindRoleSelect());
                     }
-
                     return $body;
-
                 }),
-
-
             ]);
+
+            $form->useValidatorEnd(function (Form $form, $data) {
+                if (data_get($data, 'password')) {
+                    Validator::equals(data_get($data, 'password_confirmation'))->setName('确认密码')->check($data['password']);
+                }
+            });
 
 
             $form->saving(function (Form $form) {

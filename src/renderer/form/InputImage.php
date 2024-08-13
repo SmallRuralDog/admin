@@ -19,7 +19,7 @@ namespace smallruraldog\admin\renderer\form;
  * @method $this limit($v)
  * @method $this maxLength($v)
  * @method $this maxSize($v)
- * @method $this receiver($v)
+ * @method $this receiver($v) 上传地址
  * @method $this showCompressOptions($v)
  * @method $this multiple($v)
  * @method $this joinValues($v)
